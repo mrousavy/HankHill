@@ -5,6 +5,7 @@
     <TargetFramework>netcoreapp1.1</TargetFramework>
     <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
     <StartupObject />
+    <ApplicationIcon>Hank.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
