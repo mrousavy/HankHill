@@ -4,7 +4,6 @@ using Discord.WebSocket;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
 using System.Threading.Tasks;
 
 namespace NeedsMoreJpeg {
@@ -80,19 +79,7 @@ namespace NeedsMoreJpeg {
                 foreach (IMessage message in messages) {
                     foreach (IAttachment attachment in message.Attachments) {
                         if (attachment.Width != default(int?)) {
-                            JpegHelper.Jpegify();
-                            string url = attachment.Url;
-                            string filename = Path.GetTempFileName();
-
-                            using (HttpClient client = new HttpClient()) {
-                                using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url)) {
-                                    using (
-                                        Stream contentStream = await (await client.SendAsync(request)).Content.ReadAsStreamAsync(),
-                                        stream = new FileStream(filename, FileMode.Create, FileAccess.Write, FileShare.None, 3145728, true)) {
-                                        await contentStream.CopyToAsync(stream);
-                                    }
-                                }
-                            }
+                            JpegHelper.Jpegify(attachment.Url);
                         }
                     }
                 }
