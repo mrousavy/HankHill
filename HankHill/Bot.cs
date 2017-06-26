@@ -69,7 +69,7 @@ namespace NeedsMoreJpeg {
 
                     //JPEG
                     if (text.Contains("needs more jpeg") ||
-                        text.Contains(Client.CurrentUser.Mention.ToLower()) ||
+                        text.Contains(Client.CurrentUser.Mention) ||
                         text.Contains(Client.CurrentUser.Mention.Replace("!", "")) ||
                         text.Contains("needsmorejpeg") ||
                         text.Contains("more jpeg") ||
@@ -80,6 +80,13 @@ namespace NeedsMoreJpeg {
                     else if (text.Contains("pixelate") ||
                              text.Contains("pixel")) {
                         EventHandler.Pixelate(usermessage.Channel);
+                    }
+                    //HELP
+                    else if (text == Client.CurrentUser.Mention + "help" ||
+                            text == Client.CurrentUser.Mention.Replace("!", "") + "help") {
+                        await usermessage.Channel.SendMessageAsync(
+                            "I'm Hank Hill, I don't know what a JPEG is " +
+                            "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)");
                     }
                 } catch {
                     await usermessage.Channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    _(this is an error message, sorry)_");
