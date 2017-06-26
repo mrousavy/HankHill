@@ -66,36 +66,45 @@ namespace NeedsMoreJpeg {
                     usermessage.Author.ToString(),
                     usermessage.Content));
 
-
                 try {
                     string text = usermessage.Content.ToLower();
 
                     //JPEG
-                    if (text.Contains("needs more jpeg") ||
-                        text.Contains(Client.CurrentUser.Mention) ||
-                        text.Contains(Client.CurrentUser.Mention.Replace("!", "")) ||
-                        text.Contains("needsmorejpeg") ||
-                        text.Contains("more jpeg") ||
-                        text.Contains("morejpeg")) {
+                    if (text == "needs more jpeg" ||
+                        text == "needsmorejpeg" ||
+                        text == "more jpeg" ||
+                        text == "morejpeg" ||
+                        text == "needs more jpg" ||
+                        text == "needsmorejpg" ||
+                        text == "more jpg" ||
+                        text == "morejpg") {
                         EventHandler.Jpegify(usermessage.Channel);
                     }
                     //PIXELATE
-                    else if (text.Contains("pixelate") ||
-                             text.Contains("pixel")) {
+                    else if (text == "pixelate" ||
+                             text == "pixel") {
                         EventHandler.Pixelate(usermessage.Channel);
                     }
                     //HELP
                     else if (text == Client.CurrentUser.Mention + "help" ||
-                            text == Client.CurrentUser.Mention.Replace("!", "") + "help") {
+                            text == Client.CurrentUser.Mention.Replace("!", "") + "help" ||
+                            text == Client.CurrentUser.Mention + " help" ||
+                            text == Client.CurrentUser.Mention.Replace("!", "") + " help") {
                         await usermessage.Channel.SendMessageAsync(
                             "I'm Hank Hill, I don't know what a JPEG is " +
-                            "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)");
+                            "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)." +
+                            Environment.NewLine + "Write \"needs more jpeg\" or \"pixelate\" after sending an image.");
                     }
 
                     //"loading" emoji
                     await usermessage.AddReactionAsync(new Emoji("🤔"));
-                } catch {
-                    await usermessage.Channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    _(this is an error message, sorry)_");
+                } catch (Exception ex) {
+                    Console.WriteLine($"Error Handling message! ({ex.Message})");
+                    try {
+                        await usermessage.Channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    _(this is an error message, sorry)_");
+                    } catch {
+                        // no messages allowed
+                    }
                 }
             }
         }
