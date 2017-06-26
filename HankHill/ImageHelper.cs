@@ -51,12 +51,12 @@ namespace NeedsMoreJpeg {
 
             using (Image<Rgba32> image = Image.Load(file)) {
                 JpegEncoderOptions options = new JpegEncoderOptions {
-                    Quality = 50,
+                    Quality = 60,
                     Subsample = JpegSubsample.Ratio420
                 };
                 using (FileStream output = File.OpenWrite(jpegified)) {
                     Image<Rgba32> pixelated = image.Pixelate(8);
-                    image.SaveAsJpeg(output, options);
+                    pixelated.SaveAsJpeg(output, options);
                 }
             }
 

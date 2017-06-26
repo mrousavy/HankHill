@@ -15,6 +15,9 @@ namespace NeedsMoreJpeg {
                     }
                 }
             }
+
+            await channel.SendMessageAsync(
+                "Couldn't find an Image that needs to be pixelated!");
         }
 
         public static async void Jpegify(ISocketMessageChannel channel) {
@@ -28,6 +31,9 @@ namespace NeedsMoreJpeg {
                     }
                 }
             }
+
+            await channel.SendMessageAsync(
+                "Couldn't find an Image that needs more jpeg");
         }
     }
 }

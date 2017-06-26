@@ -62,7 +62,8 @@ namespace NeedsMoreJpeg {
 
 
                 try {
-                    await usermessage.AddReactionAsync(new Emoji(""));
+                    //"loading" emoji
+                    await usermessage.AddReactionAsync(new Emoji("🤔"));
 
                     string text = usermessage.Content.ToLower();
 
