@@ -22,7 +22,8 @@ namespace NeedsMoreJpeg {
 
         public Bot() {
             DiscordSocketConfig config = new DiscordSocketConfig {
-                LogLevel = LogSeverity.Info
+                LogLevel = LogSeverity.Info,
+                WebSocketProvider = Discord.Net.Providers.WS4Net.WS4NetProvider.Instance
             };
             //Client = new WS4NetClient();
             Client = new DiscordSocketClient(config);
