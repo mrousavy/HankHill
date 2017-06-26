@@ -94,6 +94,8 @@ namespace NeedsMoreJpeg {
                             "I'm Hank Hill, I don't know what a JPEG is " +
                             "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)." +
                             Environment.NewLine + "Write \"needs more jpeg\" or \"pixelate\" after sending an image.");
+                    } else {
+                        return;
                     }
 
                     //"loading" emoji
