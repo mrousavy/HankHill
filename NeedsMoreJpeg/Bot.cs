@@ -76,12 +76,16 @@ namespace NeedsMoreJpeg {
                 ISocketMessageChannel channel = usermessage.Channel;
                 IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
 
-                foreach (IMessage message in messages) {
-                    foreach (IAttachment attachment in message.Attachments) {
-                        if (attachment.Width != default(int?)) {
-                            JpegHelper.Jpegify(attachment.Url, channel);
+                try {
+                    foreach (IMessage message in messages) {
+                        foreach (IAttachment attachment in message.Attachments) {
+                            if (attachment.Width != default(int?)) {
+                                JpegHelper.Jpegify(attachment.Url, channel);
+                            }
                         }
                     }
+                } catch {
+                    await channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    (this is an error message, sorry)");
                 }
             }
         }
