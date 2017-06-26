@@ -28,12 +28,17 @@ namespace NeedsMoreJpeg {
             Client = new DiscordSocketClient(config);
             Client.Log += Log;
             Client.MessageReceived += MessageReceived;
+            Client.Ready += Ready;
 
             try {
                 Login().GetAwaiter().GetResult();
             } catch (Exception ex) {
                 Console.WriteLine($"Could not login as Discord Bot! {ex.Message}", LogSeverity.Critical);
             }
+        }
+
+        private async Task Ready() {
+            await Client.SetGameAsync("github.com/mrousavy/HankHill");
         }
 
         public async Task Login() {
@@ -62,9 +67,6 @@ namespace NeedsMoreJpeg {
 
 
                 try {
-                    //"loading" emoji
-                    await usermessage.AddReactionAsync(new Emoji("🤔"));
-
                     string text = usermessage.Content.ToLower();
 
                     //JPEG
@@ -88,6 +90,9 @@ namespace NeedsMoreJpeg {
                             "I'm Hank Hill, I don't know what a JPEG is " +
                             "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)");
                     }
+
+                    //"loading" emoji
+                    await usermessage.AddReactionAsync(new Emoji("🤔"));
                 } catch {
                     await usermessage.Channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    _(this is an error message, sorry)_");
                 }

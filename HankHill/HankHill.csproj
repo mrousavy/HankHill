@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="publish.bat" />
+    <None Remove="publish.sh" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Discord.Net" Version="1.0.0-rc2" />
     <PackageReference Include="ImageSharp" Version="1.0.0-alpha9-00152" />
   </ItemGroup>
