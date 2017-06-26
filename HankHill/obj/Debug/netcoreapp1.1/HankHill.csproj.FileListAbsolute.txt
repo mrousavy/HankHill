@@ -1,0 +1,9 @@
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\bin\Debug\netcoreapp1.1\HankHill.deps.json
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\bin\Debug\netcoreapp1.1\HankHill.runtimeconfig.json
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\bin\Debug\netcoreapp1.1\HankHill.runtimeconfig.dev.json
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\bin\Debug\netcoreapp1.1\HankHill.dll
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\bin\Debug\netcoreapp1.1\HankHill.pdb
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\obj\Debug\netcoreapp1.1\HankHill.csprojResolveAssemblyReference.cache
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\obj\Debug\netcoreapp1.1\HankHill.AssemblyInfo.cs
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\obj\Debug\netcoreapp1.1\HankHill.dll
+c:\users\marc\documents\visual studio 2017\Projects\HankHill\HankHill\obj\Debug\netcoreapp1.1\HankHill.pdb
