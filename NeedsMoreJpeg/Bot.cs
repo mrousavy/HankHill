@@ -79,7 +79,7 @@ namespace NeedsMoreJpeg {
                 foreach (IMessage message in messages) {
                     foreach (IAttachment attachment in message.Attachments) {
                         if (attachment.Width != default(int?)) {
-                            JpegHelper.Jpegify(attachment.Url);
+                            JpegHelper.Jpegify(attachment.Url, channel);
                         }
                     }
                 }

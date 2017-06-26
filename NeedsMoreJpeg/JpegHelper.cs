@@ -1,9 +1,11 @@
-﻿using System.IO;
+﻿using ImageSharp;
+using ImageSharp.Formats;
+using System.IO;
 using System.Net.Http;
 
 namespace NeedsMoreJpeg {
     public static class JpegHelper {
-        public static async void Jpegify(string url, Discord.IMessageChannel channel) {
+        public static async void Jpegify(string url, Discord.WebSocket.ISocketMessageChannel channel) {
             string file = Path.GetTempFileName();
             string jpegified = Path.GetTempFileName();
 
@@ -17,12 +19,13 @@ namespace NeedsMoreJpeg {
                 }
             }
 
-            using (FileStream stream = File.OpenRead("foo.jpg"))
-            using (FileStream output = File.OpenWrite("bar.jpg")) {
-                Image image = new Image(stream);
-                image.Resize(image.Width / 2, image.Height / 2)
-                     .Grayscale()
-                     .Save(output);
+            using (Image<Rgba32> image = Image.Load(file)) {
+                JpegEncoderOptions options = new JpegEncoderOptions {
+                    Quality = 50
+                };
+                using (FileStream output = File.OpenWrite(jpegified)) {
+                    image.SaveAsJpeg(output, options);
+                }
             }
 
             await channel.SendFileAsync(jpegified);
