@@ -2,7 +2,6 @@
 using Discord.Commands;
 using Discord.WebSocket;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -62,31 +61,21 @@ namespace NeedsMoreJpeg {
                     usermessage.Content));
 
 
-                string text = usermessage.Content.ToLower();
-                // Determine if the message is a command by checking for all prefixes
-                if (!(
-                    text.StartsWith("needs more jpeg") ||
-                    text.StartsWith(Client.CurrentUser.Mention.ToLower()) ||
-                    text.StartsWith("needsmorejpeg") ||
-                    text.StartsWith("more jpeg") ||
-                    text.StartsWith("morejpeg")
-                    ))
-                    return;
-
-                ISocketMessageChannel channel = usermessage.Channel;
-                IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
-
                 try {
-                    foreach (IMessage message in messages) {
-                        foreach (IAttachment attachment in message.Attachments) {
-                            if (attachment.Width != default(int?)) {
-                                JpegHelper.Jpegify(attachment.Url, channel);
-                                return;
-                            }
-                        }
+                    string text = usermessage.Content.ToLower();
+                    // Determine if the message is a command by checking for all prefixes
+                    if (text.StartsWith("needs more jpeg") ||
+                        text.StartsWith(Client.CurrentUser.Mention.ToLower()) ||
+                        text.StartsWith("needsmorejpeg") ||
+                        text.StartsWith("more jpeg") ||
+                        text.StartsWith("morejpeg")) {
+                        EventHandler.Jpegify(usermessage.Channel);
+                    } else if (text.StartsWith("pixelate") ||
+                               text.StartsWith("pixel")) {
+                        EventHandler.Pixelate(usermessage.Channel);
                     }
                 } catch {
-                    await channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    (this is an error message, sorry)");
+                    await usermessage.Channel.SendMessageAsync("https://www.youtube.com/watch?v=ZXVhOPiM4mk    _(this is an error message, sorry)_");
                 }
             }
         }
