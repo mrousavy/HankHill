@@ -7,7 +7,7 @@ namespace NeedsMoreJpeg {
     public static class JpegHelper {
         public static async void Jpegify(string url, Discord.WebSocket.ISocketMessageChannel channel) {
             string file = Path.GetTempFileName();
-            string jpegified = Path.GetTempFileName();
+            string jpegified = Path.GetTempFileName().Replace(".tmp", ".jpg");
 
             using (HttpClient client = new HttpClient()) {
                 using (HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, url)) {

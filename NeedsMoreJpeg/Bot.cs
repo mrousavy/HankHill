@@ -81,6 +81,7 @@ namespace NeedsMoreJpeg {
                         foreach (IAttachment attachment in message.Attachments) {
                             if (attachment.Width != default(int?)) {
                                 JpegHelper.Jpegify(attachment.Url, channel);
+                                return;
                             }
                         }
                     }
