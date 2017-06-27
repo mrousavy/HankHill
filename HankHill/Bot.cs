@@ -41,11 +41,11 @@ namespace NeedsMoreJpeg {
         }
 
         private async Task JoinedGuild(SocketGuild arg) {
-            await Client.SetGameAsync($"github.com/mrousavy/HankHill | {Client.Guilds.Count} Guilds");
+            await Client.SetGameAsync($"#{Client.Guilds.Count} github.com/mrousavy/HankHill");
         }
 
         private async Task Ready() {
-            await Client.SetGameAsync($"github.com/mrousavy/HankHill | {Client.Guilds.Count} Guilds");
+            await Client.SetGameAsync($"#{Client.Guilds.Count} github.com/mrousavy/HankHill");
 
             foreach (IGuild guild in Client.Guilds) {
                 Console.WriteLine($"Guild ready: \"{guild.Name}\"");
