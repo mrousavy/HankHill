@@ -46,6 +46,10 @@ namespace NeedsMoreJpeg {
 
         private async Task Ready() {
             await Client.SetGameAsync($"github.com/mrousavy/HankHill | {Client.Guilds.Count} Guilds");
+
+            foreach (IGuild guild in Client.Guilds) {
+                Console.WriteLine($"Guild ready: \"{guild.Name}\"");
+            }
         }
 
         public async Task Login() {
