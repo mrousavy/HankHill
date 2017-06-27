@@ -3,6 +3,7 @@ using Discord.Commands;
 using Discord.WebSocket;
 using System;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace NeedsMoreJpeg {
@@ -30,6 +31,7 @@ namespace NeedsMoreJpeg {
             Client.Log += Log;
             Client.MessageReceived += MessageReceived;
             Client.Ready += Ready;
+            Client.JoinedGuild += JoinedGuild;
 
             try {
                 Login().GetAwaiter().GetResult();
@@ -38,8 +40,12 @@ namespace NeedsMoreJpeg {
             }
         }
 
+        private async Task JoinedGuild(SocketGuild arg) {
+            await Client.SetGameAsync($"github.com/mrousavy/HankHill | {Client.Guilds.Count} Guilds");
+        }
+
         private async Task Ready() {
-            await Client.SetGameAsync("github.com/mrousavy/HankHill");
+            await Client.SetGameAsync($"github.com/mrousavy/HankHill | {Client.Guilds.Count} Guilds");
         }
 
         public async Task Login() {
@@ -69,27 +75,20 @@ namespace NeedsMoreJpeg {
                 try {
                     string text = usermessage.Content.ToLower();
 
+                    Regex moreJpeg = new Regex("more *(jpeg|jpg)$", RegexOptions.IgnoreCase);
+                    Regex pixelate = new Regex("(pixel|pixelate)$", RegexOptions.IgnoreCase);
+                    Regex help = new Regex($"({Client.CurrentUser.Mention}|{Client.CurrentUser.Mention.Replace("!", "")}) *help", RegexOptions.IgnoreCase);
+
                     //JPEG
-                    if (text == "needs more jpeg" ||
-                        text == "needsmorejpeg" ||
-                        text == "more jpeg" ||
-                        text == "morejpeg" ||
-                        text == "needs more jpg" ||
-                        text == "needsmorejpg" ||
-                        text == "more jpg" ||
-                        text == "morejpg") {
+                    if (moreJpeg.IsMatch(text)) {
                         EventHandler.Jpegify(usermessage.Channel);
                     }
                     //PIXELATE
-                    else if (text == "pixelate" ||
-                             text == "pixel") {
+                    else if (pixelate.IsMatch(text)) {
                         EventHandler.Pixelate(usermessage.Channel);
                     }
                     //HELP
-                    else if (text == Client.CurrentUser.Mention + "help" ||
-                            text == Client.CurrentUser.Mention.Replace("!", "") + "help" ||
-                            text == Client.CurrentUser.Mention + " help" ||
-                            text == Client.CurrentUser.Mention.Replace("!", "") + " help") {
+                    else if (help.IsMatch(text)) {
                         await usermessage.Channel.SendMessageAsync(
                             "I'm Hank Hill, I don't know what a JPEG is " +
                             "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)." +
