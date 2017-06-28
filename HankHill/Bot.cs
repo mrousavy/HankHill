@@ -31,7 +31,8 @@ namespace NeedsMoreJpeg {
             Client.Log += Log;
             Client.MessageReceived += MessageReceived;
             Client.Ready += Ready;
-            Client.JoinedGuild += JoinedGuild;
+            Client.JoinedGuild += GuildUpdated;
+            Client.LeftGuild += GuildUpdated;
 
             try {
                 Login().GetAwaiter().GetResult();
@@ -40,8 +41,10 @@ namespace NeedsMoreJpeg {
             }
         }
 
-        private async Task JoinedGuild(SocketGuild arg) {
+        private async Task GuildUpdated(SocketGuild arg) {
             await Client.SetGameAsync($"#{Client.Guilds.Count} github.com/mrousavy/HankHill");
+
+            Console.WriteLine($"Guild updated: \"{arg.Name}\"");
         }
 
         private async Task Ready() {
