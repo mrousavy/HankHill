@@ -82,6 +82,7 @@ namespace HankHill
 
                     var moreJpeg = new Regex("more *(jpeg|jpg)$", RegexOptions.IgnoreCase);
                     var pixelate = new Regex("(pixel|pixelate)$", RegexOptions.IgnoreCase);
+                    var nuke = new Regex("(nuke|nuking)$", RegexOptions.IgnoreCase);
                     var help = new Regex(
                         $"({Client.CurrentUser.Mention}|{Client.CurrentUser.Mention.Replace("!", "")}) *help",
                         RegexOptions.IgnoreCase);
@@ -92,6 +93,9 @@ namespace HankHill
                     //PIXELATE
                     else if (pixelate.IsMatch(text))
                         EventHandler.Pixelate(usermessage.Channel);
+                    //PIXELATE
+                    else if (nuke.IsMatch(text))
+                        EventHandler.Nuke(usermessage.Channel);
                     //HELP
                     else if (help.IsMatch(text))
                         await usermessage.Channel.SendMessageAsync(

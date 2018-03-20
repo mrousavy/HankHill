@@ -50,5 +50,27 @@ namespace HankHill
                 Console.WriteLine($"Unknown Error while jpegifying! {ex.Message}");
             }
         }
+
+        public static async void Nuke(ISocketMessageChannel channel)
+        {
+            try
+            {
+                IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
+
+                foreach (var message in messages)
+                foreach (var attachment in message.Attachments)
+                    if (attachment.Width != default(int?))
+                    {
+                        ImageHelper.Nuke(attachment.Url, channel);
+                        return;
+                    }
+
+                await channel.SendMessageAsync(
+                    "Couldn't find an Image that needs to be nuked");
+            } catch (Exception ex)
+            {
+                Console.WriteLine($"Unknown Error while nuking! {ex.Message}");
+            }
+        }
     }
 }
