@@ -13,12 +13,14 @@ namespace HankHill
                 var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
-                foreach (var attachment in message.Attachments)
                 {
-                    if (attachment.Width != default(int?))
+                    foreach (var attachment in message.Attachments)
                     {
-                        ImageHelper.Pixelate(attachment.Url, channel);
-                        return;
+                        if (attachment.Width > 0)
+                        {
+                            ImageHelper.Pixelate(attachment.Url, channel);
+                            return;
+                        }
                     }
                 }
 
@@ -37,12 +39,14 @@ namespace HankHill
                 var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
-                foreach (var attachment in message.Attachments)
                 {
-                    if (attachment.Width != default(int?))
+                    foreach (var attachment in message.Attachments)
                     {
-                        ImageHelper.Jpegify(attachment.Url, channel);
-                        return;
+                        if (attachment.Width > 0)
+                        {
+                            ImageHelper.Jpegify(attachment.Url, channel);
+                            return;
+                        }
                     }
                 }
 
@@ -61,12 +65,14 @@ namespace HankHill
                 var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
-                foreach (var attachment in message.Attachments)
                 {
-                    if (attachment.Width != default(int?))
+                    foreach (var attachment in message.Attachments)
                     {
-                        ImageHelper.Nuke(attachment.Url, channel);
-                        return;
+                        if (attachment.Width > 0)
+                        {
+                            ImageHelper.Nuke(attachment.Url, channel);
+                            return;
+                        }
                     }
                 }
 
