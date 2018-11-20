@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Discord;
 using Discord.WebSocket;
 
@@ -11,15 +10,17 @@ namespace HankHill
         {
             try
             {
-                IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
+                var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
                 foreach (var attachment in message.Attachments)
+                {
                     if (attachment.Width != default(int?))
                     {
                         ImageHelper.Pixelate(attachment.Url, channel);
                         return;
                     }
+                }
 
                 await channel.SendMessageAsync(
                     "Couldn't find an Image that needs to be pixelated!");
@@ -33,15 +34,17 @@ namespace HankHill
         {
             try
             {
-                IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
+                var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
                 foreach (var attachment in message.Attachments)
+                {
                     if (attachment.Width != default(int?))
                     {
                         ImageHelper.Jpegify(attachment.Url, channel);
                         return;
                     }
+                }
 
                 await channel.SendMessageAsync(
                     "Couldn't find an Image that needs more jpeg");
@@ -55,15 +58,17 @@ namespace HankHill
         {
             try
             {
-                IEnumerable<IMessage> messages = await channel.GetMessagesAsync().Flatten();
+                var messages = await channel.GetMessagesAsync().Flatten();
 
                 foreach (var message in messages)
                 foreach (var attachment in message.Attachments)
+                {
                     if (attachment.Width != default(int?))
                     {
                         ImageHelper.Nuke(attachment.Url, channel);
                         return;
                     }
+                }
 
                 await channel.SendMessageAsync(
                     "Couldn't find an Image that needs to be nuked");

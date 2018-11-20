@@ -1,10 +1,5 @@
 ﻿using System;
-using System.IO;
 using System.Threading;
-using ImageSharp;
-using ImageSharp.Formats;
-using ImageSharp.PixelFormats;
-using SixLabors.Primitives;
 
 namespace HankHill
 {

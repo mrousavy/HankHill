@@ -94,21 +94,30 @@ namespace HankHill
 
                     //JPEG
                     if (moreJpeg.IsMatch(text))
+                    {
                         EventHandler.Jpegify(usermessage.Channel);
+                    }
                     //PIXELATE
                     else if (pixelate.IsMatch(text))
+                    {
                         EventHandler.Pixelate(usermessage.Channel);
+                    }
                     //PIXELATE
                     else if (nuke.IsMatch(text))
+                    {
                         EventHandler.Nuke(usermessage.Channel);
+                    }
                     //HELP
                     else if (help.IsMatch(text))
+                    {
                         await usermessage.Channel.SendMessageAsync(
                             "I'm Hank Hill, I don't know what a JPEG is " +
                             "and I'm made by <@266162606161526784> (http://github.com/mrousavy/HankHill)." +
                             Environment.NewLine + "Write \"needs more jpeg\" or \"pixelate\" after sending an image.");
-                    else
+                    } else
+                    {
                         return;
+                    }
 
                     //"loading" emoji
                     await usermessage.AddReactionAsync(new Emoji("🤔"));

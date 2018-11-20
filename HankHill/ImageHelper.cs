@@ -26,6 +26,7 @@ namespace HankHill
                 }
             });
         }
+
         public static async void Pixelate(string url, ISocketMessageChannel channel)
         {
             await ProcessImage(url, channel, (image, newpath) =>
@@ -42,6 +43,7 @@ namespace HankHill
                 }
             });
         }
+
         public static async void Nuke(string url, ISocketMessageChannel channel)
         {
             await ProcessImage(url, channel, (image, newpath) =>
@@ -53,7 +55,8 @@ namespace HankHill
                 };
                 using (var output = File.OpenWrite(newpath))
                 {
-                    var bounds = new Rectangle((int) (image.Width * 0.2), (int) (image.Height * 0.2), (int) (image.Width * 0.6), (int) (image.Height * 0.6));
+                    var bounds = new Rectangle((int) (image.Width * 0.2), (int) (image.Height * 0.2),
+                        (int) (image.Width * 0.6), (int) (image.Height * 0.6));
                     image.Glow(Rgba32.Violet, (int) (image.Width * 0.5), bounds);
                     image.BoxBlur(2);
                     image.Vignette((int) (image.Width * 0.5), (int) (image.Height * 0.5));
@@ -65,7 +68,8 @@ namespace HankHill
             });
         }
 
-        public static async Task ProcessImage(string url, ISocketMessageChannel channel, Action<Image<Rgba32>, string> func)
+        public static async Task ProcessImage(string url, ISocketMessageChannel channel,
+            Action<Image<Rgba32>, string> func)
         {
             string file = Path.GetTempFileName();
             string newpath = Path.GetTempFileName().Replace(".tmp", ".jpg");
