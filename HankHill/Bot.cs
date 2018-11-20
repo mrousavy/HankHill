@@ -45,7 +45,10 @@ namespace HankHill
         {
             await Client.SetGameAsync($"#{Client.Guilds.Count} github.com/mrousavy/HankHill");
 
-            foreach (IGuild guild in Client.Guilds) Console.WriteLine($"Guild ready: \"{guild.Name}\"");
+            foreach (IGuild guild in Client.Guilds)
+            {
+                Console.WriteLine($"Guild ready: \"{guild.Name}\"");
+            }
         }
 
         public async Task Login()
@@ -67,7 +70,9 @@ namespace HankHill
         {
             // Don't process the command if it was a System Message
             if (!(messageArg is SocketUserMessage usermessage))
+            {
                 return;
+            }
 
             if (usermessage.Author.ToString() != Client.CurrentUser.ToString())
             {

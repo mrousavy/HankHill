@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Discord.WebSocket;
 using ImageSharp;
 using ImageSharp.Formats;
+using SixLabors.Primitives;
 
 namespace HankHill
 {
@@ -36,7 +37,7 @@ namespace HankHill
                 };
                 using (var output = File.OpenWrite(newpath))
                 {
-                    Image<Rgba32> pixelatedImage = image.Pixelate(8);
+                    var pixelatedImage = image.Pixelate(8);
                     pixelatedImage.SaveAsJpeg(output, options);
                 }
             });
@@ -47,12 +48,18 @@ namespace HankHill
             {
                 var options = new JpegEncoderOptions
                 {
-                    Quality = 60,
+                    Quality = 20,
                     Subsample = JpegSubsample.Ratio420
                 };
                 using (var output = File.OpenWrite(newpath))
                 {
-                    // TODO: nuke image
+                    var bounds = new Rectangle((int) (image.Width * 0.2), (int) (image.Height * 0.2), (int) (image.Width * 0.6), (int) (image.Height * 0.6));
+                    image.Glow(Rgba32.Violet, (int) (image.Width * 0.5), bounds);
+                    image.BoxBlur(2);
+                    image.Vignette((int) (image.Width * 0.5), (int) (image.Height * 0.5));
+                    image.Saturation(100);
+                    image.Quantize(Quantization.Octree, 64);
+                    image.Contrast(10);
                     image.SaveAsJpeg(output, options);
                 }
             });
@@ -85,7 +92,7 @@ namespace HankHill
 
             try
             {
-                using (Image<Rgba32> image = Image.Load(file))
+                using (var image = Image.Load(file))
                 {
                     func(image, newpath);
                 }
