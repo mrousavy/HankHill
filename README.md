@@ -1,7 +1,7 @@
 # Hank Hill
 A discord bot for pixelating and jpegifying images
 
-<a href="https://discordapp.com/oauth2/authorize?client_id=323123443136593920&scope=bot&permissions=67184707"><img src="https://img.shields.io/badge/Add%20to%20your-Discord-9399ff.svg" alt="Invite to your Guild"></a> [![Discord](https://discordapp.com/api/guilds/326668996550197249/widget.png)](https://discord.gg/ebXZnFX)
+<a href="https://discordapp.com/oauth2/authorize?client_id=328973370215366659&scope=bot&permissions=67184707"><img src="https://img.shields.io/badge/Add%20to%20your-Discord-9399ff.svg" alt="Invite to your Guild"></a> [![Discord](https://discordapp.com/api/guilds/326668996550197249/widget.png)](https://discord.gg/ebXZnFX)
 
 <a href='https://ko-fi.com/F1F8CLXG' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://az743702.vo.msecnd.net/cdn/kofi2.png?v=0' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a>
 
